@@ -1,8 +1,8 @@
 var productcontainer;
-if (localStorage.getItem('prodects') == null) {
+if (localStorage.getItem('products') == null) {
     productcontainer = [];
 } else {
-    productcontainer = JSON.parse(localStorage.getItem('prodects'));
+    productcontainer = JSON.parse(localStorage.getItem('products'));
     displayProducts();
 }
 
@@ -20,7 +20,7 @@ function addProduct() {
         description: productDescInput.value
     }
     productcontainer.push(product);
-    localStorage.setItem('prodects',JSON.stringify(productcontainer));
+    localStorage.setItem('products',JSON.stringify(productcontainer));
     clearForm();
     displayProducts();
 
@@ -42,10 +42,24 @@ function displayProducts() {
         <td>${productcontainer[i].price}</td>
         <td>${productcontainer[i].category}</td>
         <td>${productcontainer[i].description}</td>
-        <td><button class="btn btn-outline-danger">Delete</button></td>
-        <td><button class="btn btn-outline-warning">Update</button></td>
+        <td><button onclick="deletProduct(${i})" class="btn btn-outline-danger">Delete</button></td>
+        <td><button onclick="updateProduct(${i})" class="btn btn-outline-warning">Update</button></td>
       </tr>`;
     }
 document.getElementById("productTableBody").innerHTML = cartoona;
 }
-localStorage.clear();
+// localStorage.clear();
+function deletProduct(index) {
+    productcontainer.splice(index,1);
+    localStorage.setItem('products',JSON.stringify(productcontainer));
+    displayProducts();
+}
+
+function updateProduct(index) {
+    productNameInput.value = productcontainer[index].name;
+    productPriceInput.value = productcontainer[index].price;
+    productCategoryInput.value = productcontainer[index].category;
+    productDescInput.value = productcontainer[index].description;
+    document.getElementById("mainbutton").innerHTML = "Update Product";
+    deletProduct(index);
+}
