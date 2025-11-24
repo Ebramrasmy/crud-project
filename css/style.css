@@ -1,3 +1,23 @@
 textarea{
     resize: none;
 }
+.card {
+  border-radius: 18px !important;
+}
+
+.table th, .table td {
+  vertical-align: middle !important;
+}
+
+.btn-outline-danger, .btn-outline-warning {
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  border-radius: 10px;
+}
+
+input.form-control {
+  border-radius: 10px;
+}
