@@ -55,6 +55,37 @@ function deletProduct(index) {
     displayProducts();
 }
 
+function searchProducts(term) {
+    term = term.toLowerCase(); 
+    var cartoona = "";
+
+    for (var i = 0; i < productcontainer.length; i++) {
+
+        if (
+            productcontainer[i].name.toLowerCase().includes(term) ||
+            productcontainer[i].price.toString().toLowerCase().includes(term) ||
+            productcontainer[i].category.toLowerCase().includes(term) ||
+            productcontainer[i].description.toLowerCase().includes(term)
+        ) {
+
+            cartoona += `
+            <tr>
+                <th scope="row">${i+1}</th>
+                <td>${productcontainer[i].name}</td>
+                <td>${productcontainer[i].price}</td>
+                <td>${productcontainer[i].category}</td>
+                <td>${productcontainer[i].description}</td>
+                <td><button onclick="deletProduct(${i})" class="btn btn-outline-danger">Delete</button></td>
+                <td><button onclick="updateProduct(${i})" class="btn btn-outline-warning">Update</button></td>
+            </tr>`;
+        }
+    }
+
+    document.getElementById("productTableBody").innerHTML = cartoona;
+}
+
+
+
 function updateProduct(index) {
     productNameInput.value = productcontainer[index].name;
     productPriceInput.value = productcontainer[index].price;
